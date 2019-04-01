@@ -11,18 +11,25 @@ package es.proyectoPacman.logica;
  */
 public class Main {
 
-    Mapa mapa = new Mapa();
+    
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
-    
-        for(int fila=0; fila<mapa.length; fila++) {
-            for(int columna=0; columna<15; columna++) {
-                System.out.print(mapa[fila][columna]+" ");
-            }
-            System.out.println();
+        
+        Mapa mapa = new Mapa();
+        
+        for(int i=0; i<=10; i++){
+        mapa.movimiento(3);
+        mapa.mostrarTablero();
+        }
+        for(int i=0; i<=4; i++){
+        mapa.movimiento(0);
+        mapa.mostrarTablero();
+        }
+        for(int i=0; i<=2; i++){
+        mapa.movimiento(2);
+        mapa.mostrarTablero();
         }
     }
     

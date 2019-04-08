@@ -11,7 +11,6 @@ package es.proyectoPacman.logica;
  */
 public class Main {
 
-    
     /**
      * @param args the command line arguments
      */
@@ -19,18 +18,22 @@ public class Main {
         
         Mapa mapa = new Mapa();
         
-        for(int i=0; i<=10; i++){
-        mapa.movimiento(3);
-        mapa.mostrarTablero();
+        for(int i=0; i<=30; i++){
+        //    mapa.movimiento(3);
+            mapa.mostrarTablero();
+            mapa.movimiento(0);
+            mapa.movimientoF();
         }
-        for(int i=0; i<=4; i++){
-        mapa.movimiento(0);
-        mapa.mostrarTablero();
-        }
-        for(int i=0; i<=2; i++){
-        mapa.movimiento(2);
-        mapa.mostrarTablero();
-        }
+        //for(int i=0; i<=4; i++){
+        //    mapa.movimiento(0);
+        //    mapa.movimientoF();
+        //    mapa.mostrarTablero();
+        //}
+        //for(int i=0; i<=2; i++){
+        //    mapa.movimiento(2);
+        //    mapa.movimientoF();
+        //    mapa.mostrarTablero();
+        //}
     }
     
 }

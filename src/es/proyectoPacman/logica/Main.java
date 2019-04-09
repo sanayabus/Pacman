@@ -18,22 +18,12 @@ public class Main {
         
         Mapa mapa = new Mapa();
         
-        for(int i=0; i<=30; i++){
+        for(int i=0; i<=50; i++){
         //    mapa.movimiento(3);
             mapa.mostrarTablero();
-            mapa.movimiento(0);
+            mapa.movimiento(2);
             mapa.movimientoF();
         }
-        //for(int i=0; i<=4; i++){
-        //    mapa.movimiento(0);
-        //    mapa.movimientoF();
-        //    mapa.mostrarTablero();
-        //}
-        //for(int i=0; i<=2; i++){
-        //    mapa.movimiento(2);
-        //    mapa.movimientoF();
-        //    mapa.mostrarTablero();
-        //}
     }
     
 }

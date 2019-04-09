@@ -24,6 +24,8 @@ public class Mapa {
     int filaJ = 19;
     int columnaF = 7;
     int filaF = 11;
+    boolean gameOver = false;
+    int contador = 0;
     
     Random random = new Random();
     ArrayList<Integer> direccionesFant = new ArrayList();
@@ -60,7 +62,7 @@ public class Mapa {
                       {'M','P','M','B','B','B','M','M','M','B','B','B','M','P','M'}, //20
                       {'M','B','M','M','M','B','M','B','B','B','M','M','M','B','M'},
                       {'M','B','B','B','B','B','B','B','M','B','B','B','B','B','M'},
-                      {'M','M','M','M','M','M','M','M','M','M','M','M','M','M','M'},
+                      {'M','M','M','M','M','M','M','M','M','M','M','M','M','M','M'}
     };
     
     public void mostrarTablero() {
@@ -68,15 +70,19 @@ public class Mapa {
         for(int fila=0; fila<mapa.length; fila++) {
             for(int columna=0; columna<15; columna++) {
                 if(columna == columnaF && fila == filaF){
-                    System.out.print("F ");
+                    System.out.print("F  ");
                 } else {
-                    System.out.print(mapa[fila][columna]+" ");
+                    System.out.print(mapa[fila][columna]+"  ");
                 }
             }
             System.out.println();
         }
     }
     public void movimiento(int direccion){
+        
+        this.colisionFant();
+        this.colisionPot();
+        contador--;
         
         switch(direccion){
             case ARRIBA:
@@ -188,7 +194,7 @@ public class Mapa {
             
         direccionesFant.clear();
         
-        switch(direccion){
+        switch(direccionF){
             case ARRIBA:
                 if(mapa[filaF-1][columnaF] != MURO){
                     direccionesFant.add(ARRIBA);
@@ -219,33 +225,51 @@ public class Mapa {
                 }
                 break;
             case IZQUIERDA:
+                if(mapa[filaF][columnaF-1] != MURO){
+                    direccionesFant.add(IZQUIERDA);
+                }
                 if(mapa[filaF-1][columnaF] != MURO){
                     direccionesFant.add(ARRIBA);
                 }
                 if(mapa[filaF+1][columnaF] != MURO){
                     direccionesFant.add(ABAJO);
-                }
-                if(mapa[filaF][columnaF-1] != MURO){
-                    direccionesFant.add(IZQUIERDA);
                 }
                 if(mapa[filaF][columnaF+1] != MURO){
                     direccionesFant.add(DERECHA);
                 }
                 break;
             case DERECHA:
+                if(mapa[filaF][columnaF+1] != MURO){
+                    direccionesFant.add(DERECHA);
+                }
                 if(mapa[filaF-1][columnaF] != MURO){
                     direccionesFant.add(ARRIBA);
                 }
                 if(mapa[filaF+1][columnaF] != MURO){
                     direccionesFant.add(ABAJO);
                 }
-                if(mapa[filaF][columnaF+1] != MURO){
-                    direccionesFant.add(DERECHA);
-                }
                 if(mapa[filaF][columnaF-1] != MURO){
                     direccionesFant.add(IZQUIERDA);
                 }
                 break;
+        }
+    }
+    
+    public void colisionFant(){
+        if (columnaJ == columnaF && filaJ == filaF){
+            if (contador > 0){
+                columnaF = 7;
+                filaF = 11;
+            } else {
+                gameOver = true;
+                System.out.println("GAME OVER");
+            }
+        }
+    }
+    
+    public void colisionPot(){
+        if (mapa[filaJ][columnaJ] == POTENCIADOR){
+            contador = 25;
         }
     }
 }

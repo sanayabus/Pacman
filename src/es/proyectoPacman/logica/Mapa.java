@@ -14,27 +14,50 @@ import java.util.Random;
  */
 public class Mapa {
     
-    final int ARRIBA = 0;
+    //VARIABLES
+    
+    //Constantes
+    
+    final int ARRIBA = 0;  
     final int ABAJO = 1;
     final int IZQUIERDA = 2;
     final int DERECHA = 3;
-    int direccion = 0;
+    
+    // Respecto a las posiciones y direcciones de el jugador y los fantasmas
+    
+    int direccion = 0; 
     int direccionF = 1;
     int columnaJ = 7;
     int filaJ = 19;
     int columnaF = 7;
     int filaF = 11;
-    boolean gameOver = false;
-    int contador = 0;
     
-    Random random = new Random();
+    //Fin de partida
+    
+    boolean gameOver = false; 
+    
+    // Contador para el potenciador
+    
+    int contador = 0;  
+    
+    // Aleatorio para el recorrido de los fantasmas
+    
+    Random random = new Random();  
+    
+    // Lista donde se almacenaran las direcciones posibles de los fantasmas
+    
     ArrayList<Integer> direccionesFant = new ArrayList();
+    
+    // Número de direcciones posibles y dirección aleaotira a tomar por los fantasmas
+    
     int numDireccionesF = 0;
     int direccionFantAleatoria = 0;
     
+    //Carácteres de la matriz
+    
     char MURO = 'M';
-    char PUNTO = 'B'; // (hay un punto)
-    char POTENCIADOR = 'P';
+    char PUNTO = 'B'; // (hay punto)
+    char POTENCIADOR = 'P'; // Con esto el jugador puede comer fantasmas
     char JUGADOR = 'J';
     char VACÍO = 'V'; // ya ha estado el jugador aquí (no hay punto)
     char FANTASMA1 = 'F';
@@ -65,6 +88,8 @@ public class Mapa {
                       {'M','M','M','M','M','M','M','M','M','M','M','M','M','M','M'}
     };
     
+    // Imprimir tablero en consola
+    
     public void mostrarTablero() {
         System.out.println("mostrar tablero");
         for(int fila=0; fila<mapa.length; fila++) {
@@ -78,11 +103,15 @@ public class Mapa {
             System.out.println();
         }
     }
+    
+    //Movimiento del jugador
+    
     public void movimiento(int direccion){
         
         this.colisionFant();
         this.colisionPot();
         contador--;
+        System.out.println("Potenciador: " + contador);
         
         switch(direccion){
             case ARRIBA:
@@ -130,6 +159,8 @@ public class Mapa {
         
     }
     
+    //Movimiento del fantasma
+    
     public void movimientoF(){
         
         this.direccionF();
@@ -140,7 +171,6 @@ public class Mapa {
         }
         else {
             numDireccionesF --;
-            //direccionesFant.remove(numDireccionesF);
             direccionF = direccionesFant.get(random.nextInt(numDireccionesF));
         }
         // si el tamaño es 1 ir en la dirección que haya en la lista
@@ -189,6 +219,8 @@ public class Mapa {
                 break;
         }
     }
+    
+    //Almacenamiento de posibles direcciones en Array List
     
     public void direccionF(){
             
@@ -255,6 +287,8 @@ public class Mapa {
         }
     }
     
+    // Consecuencias en la colisión del jugador con el fantasma según el contador del potenciador siga activo o no
+    
     public void colisionFant(){
         if (columnaJ == columnaF && filaJ == filaF){
             if (contador > 0){
@@ -266,6 +300,8 @@ public class Mapa {
             }
         }
     }
+    
+    //Obtención del potenciador
     
     public void colisionPot(){
         if (mapa[filaJ][columnaJ] == POTENCIADOR){

@@ -18,8 +18,9 @@ public class Main {
         
         Mapa mapa = new Mapa();
         
+        //Bucle para probar el código
+        
         for(int i=0; i<=50; i++){
-        //    mapa.movimiento(3);
             mapa.mostrarTablero();
             mapa.movimiento(2);
             mapa.movimientoF();

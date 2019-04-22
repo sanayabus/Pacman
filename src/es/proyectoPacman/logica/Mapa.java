@@ -108,54 +108,59 @@ public class Mapa {
     
     public void movimiento(int direccion){
         
-        this.colisionFant();
+        this.gameOver();
         this.colisionPot();
         contador--;
         System.out.println("Potenciador: " + contador);
         
-        switch(direccion){
-            case ARRIBA:
-                if(mapa[filaJ-1][columnaJ] != MURO){
-                    mapa[filaJ][columnaJ] = VACÍO;
-                    mapa[filaJ-1][columnaJ] = JUGADOR;
-                    filaJ--;
-                    //System.out.println("arriba");
-                } else {
-                    //System.out.println("parado");
-                }
-                break;
-            case ABAJO:
-                if(mapa[filaJ+1][columnaJ] != MURO){
-                    mapa[filaJ][columnaJ] = VACÍO;
-                    mapa[filaJ+1][columnaJ] = JUGADOR;
-                    filaJ++;
-                    //System.out.println("abajo");
-                } else {
-                    //System.out.println("parado");
-                }
-                break;
-            case IZQUIERDA:
-                if(mapa[filaJ][columnaJ-1] != MURO){
-                    mapa[filaJ][columnaJ] = VACÍO;
-                    mapa[filaJ][columnaJ-1] = JUGADOR;
-                    columnaJ--;
-                    //System.out.println("izquierda");
-                } else {
-                    //System.out.println("parado");
-                }
-                break;
-            case DERECHA:
-                if(mapa[filaJ][columnaJ+1] != MURO){
-                    mapa[filaJ][columnaJ] = VACÍO;
-                    mapa[filaJ][columnaJ+1] = JUGADOR;
-                    columnaJ++;
-                    //System.out.println("derecha");
-                    //System.out.println(columnaJ);
-                } else {
-                    //System.out.println("parado");
-                }
-                break;
+        if (gameOver == false){
+            switch(direccion){
+                case ARRIBA:
+                    if(mapa[filaJ-1][columnaJ] != MURO){
+                        mapa[filaJ][columnaJ] = VACÍO;
+                        mapa[filaJ-1][columnaJ] = JUGADOR;
+                        filaJ--;
+                        //System.out.println("arriba");
+                    } else {
+                        //System.out.println("parado");
+                    }
+                    break;
+                case ABAJO:
+                    if(mapa[filaJ+1][columnaJ] != MURO){
+                        mapa[filaJ][columnaJ] = VACÍO;
+                        mapa[filaJ+1][columnaJ] = JUGADOR;
+                        filaJ++;
+                        //System.out.println("abajo");
+                    } else {
+                        //System.out.println("parado");
+                    }
+                    break;
+                case IZQUIERDA:
+                    if(mapa[filaJ][columnaJ-1] != MURO){
+                        mapa[filaJ][columnaJ] = VACÍO;
+                        mapa[filaJ][columnaJ-1] = JUGADOR;
+                        columnaJ--;
+                        //System.out.println("izquierda");
+                    } else {
+                        //System.out.println("parado");
+                    }
+                    break;
+                case DERECHA:
+                    if(mapa[filaJ][columnaJ+1] != MURO){
+                        mapa[filaJ][columnaJ] = VACÍO;
+                        mapa[filaJ][columnaJ+1] = JUGADOR;
+                        columnaJ++;
+                        //System.out.println("derecha");
+                        //System.out.println(columnaJ);
+                    } else {
+                        //System.out.println("parado");
+                    }
+                    break;
+            }
+        } else {
+            System.out.println("GAME OVER");
         }
+        
         
     }
     
@@ -289,15 +294,17 @@ public class Mapa {
     
     // Consecuencias en la colisión del jugador con el fantasma según el contador del potenciador siga activo o no
     
-    public void colisionFant(){
+    public boolean gameOver(){
         if (columnaJ == columnaF && filaJ == filaF){
             if (contador > 0){
                 columnaF = 7;
                 filaF = 11;
+                return false;
             } else {
-                gameOver = true;
-                System.out.println("GAME OVER");
+                return true;
             }
+        } else {
+            return false;
         }
     }
     
